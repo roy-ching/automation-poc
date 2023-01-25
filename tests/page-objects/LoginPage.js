@@ -1,4 +1,5 @@
 import { expect } from "@playwright/test"
+import ENV from '../utils/env'
 
 export class LoginPage {
 
@@ -12,12 +13,14 @@ export class LoginPage {
     }
 
     async goTo(path) {
-        await this.page.goto(path)
+        console.log('***ENV***'+ENV.BASE_URL)
+        await this.page.goto(ENV.BASE_URL)
+        // await this.page.goto(`${conf.use?.baseURL}${path}`)
     }
 
-    async validLogin(username, password) {
-        await this.userIdField.type(username)
-        await this.passwordField.type(password)
+    async validLogin() {
+        await this.userIdField.type(ENV.USERNAME)
+        await this.passwordField.type(ENV.PASSWORD)
         await this.logindButton.click()
     }
 
