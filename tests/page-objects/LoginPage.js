@@ -12,8 +12,7 @@ export class LoginPage {
 
     }
 
-    async goTo(path) {
-        console.log('***ENV***'+ENV.BASE_URL)
+    async goTo() {
         await this.page.goto(ENV.BASE_URL)
         // await this.page.goto(`${conf.use?.baseURL}${path}`)
     }

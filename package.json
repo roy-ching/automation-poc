@@ -1,0 +1,20 @@
+{
+  "name": "playwrightautomation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "env:qa": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=chromium",
+    "env:uat": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=chromium",
+    "env:edcn": "cross-env test_env=edcn npx playwright test --config=playwright.config.js --project=chromium"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.29.2",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
+    "prettier": "2.8.3"
+  }
+}

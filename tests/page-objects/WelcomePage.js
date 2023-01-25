@@ -8,5 +8,6 @@ export class WelcomePage {
         this.page = page
         this.header = new Header(page)
         this.title = page.locator('h1')
+        this.privacySecurityLink = page.locator('[href="pmx_online_security.html"]')
     }
 }
