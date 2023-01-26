@@ -1,15 +1,18 @@
-# poc-playwright
+# Web Test Automation - Playwright
 
-## Usage
+## Getting Started
+1. git clone git@github.com:roy-ching/automation-poc.git
+2. npm install
+3. npm run test
 
-#### Multiple browsers
-npx playwright test
+## Run Specific Suites 
 
-#### Specific browser
-npx playwright test --project=chromium
-npx playwright test --project=firefox
-npx playwright test --project=webkit  
+### QA Environment
+- npm run regression:qa-chrome
+- npm run regression:qa-firefox
+- npm run regression:qa-safari
 
-#### Enviroment
-npm run env:qa
-npm run env:uat
+### UAT Environment
+- npm run regression:uat-chrome
+- npm run regression:uat-firefox
+- npm run regression:uat-safari

@@ -4,8 +4,8 @@ const { WelcomePage } = require('./page-objects/WelcomePage')
 
 // import ENV from '../utils/env'
 
-let loginPage;
-let welcomePage;
+let loginPage
+let welcomePage
 
 test.describe('PMX Login - T5373276', () => {
 
@@ -22,6 +22,7 @@ test.describe('PMX Login - T5373276', () => {
         await loginPage.validLogin()
         await page.waitForLoadState('networkidle')
         await context.storageState({path: 'state.json'})
+        
     })
 
     test('Validate Login Icon is displayed', async ({ page }) => {

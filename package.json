@@ -4,9 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "env:qa": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=chromium",
-    "env:uat": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=chromium",
-    "env:edcn": "cross-env test_env=edcn npx playwright test --config=playwright.config.js --project=chromium"
+    "regression:qa-chrome": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=chromium",
+    "regression:qa-firefox": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=firefox",
+    "regression:qa-safari": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=webkit",
+    "regression:uat-chrome": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=chromium",
+    "regression:uat-firefox": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=firefox",
+    "regression:uat-safari": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=webkit",
+    "regression:edcn-chrome": "cross-env test_env=edcn npx playwright test --config=playwright.config.js --project=chromium"
   },
   "keywords": [],
   "author": "",
