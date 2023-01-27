@@ -12,7 +12,7 @@ jobs:
       - run: npx playwright install --with-deps
       - run: |
             touch .env.ci
-            echo "BASE_URL = ${{ secrets.TEST_URL }}" >> env.ci
-            echo "USERNAME = ${{ secrets.QA_USERNAME }}" >> env.ci
-            echo "PASSWORD = ${{ secrets.QA_PASSWORD }}" >> env.ci
+            echo "BASE_URL = ${{ secrets.TEST_URL }}" >> .env.ci
+            echo "USERNAME = ${{ secrets.QA_USERNAME }}" >> .env.ci
+            echo "PASSWORD = ${{ secrets.QA_PASSWORD }}" >> .env.ci
       - run: npm run regression:qa-chrome
