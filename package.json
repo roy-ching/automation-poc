@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "regression:qa-chrome": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=chromium",
+    "regression:qa-chrome": "cross-env (isCi ? test_env=ci : test_env=qa) npx playwright test --config=playwright.config.js --project=chromium",
     "regression:qa-firefox": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=firefox",
     "regression:qa-safari": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=webkit",
     "regression:uat-chrome": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=chromium",
@@ -19,6 +19,7 @@
     "@playwright/test": "^1.29.2",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.3",
+    "is-ci": "^3.0.1",
     "prettier": "2.8.3"
   }
 }

@@ -8,6 +8,11 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
       - name: install dependencies
-        run: npm i && npm ci
+        run: npm ci
       - run: npx playwright install --with-deps
+      - run: |
+            touch .env.ci
+            echo "BASE_URL = ${{ secrets.TEST_URL }}" >> env.ci
+            echo "USERNAME = ${{ secrets.QA_USERNAME }}" >> env.ci
+            echo "PASSWORD = ${{ secrets.QA_PASSWORD }}" >> env.ci
       - run: npm run regression:qa-chrome
