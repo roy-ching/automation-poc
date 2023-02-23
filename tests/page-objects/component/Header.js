@@ -7,9 +7,17 @@ export class Header {
         this.clientLink = page.locator('a[href^="#/vanco/createClientProfile"]')
         this.userLink = page.locator ('#SKey > a')
         this.helpLink = page.locator ('a[href="#/vanco/help"]')
-        this.clientListSelect = page.locator ('input[placeholder="Enter Client Name or ID"]')
-        this.clientName = page.locator ('span[data-ng-if^="currentClient.clientId"]')
+        this.clientNameInput = page.locator ('input[placeholder="Enter Client Name or ID"]')
+        this.clientName = page.locator (' .ng-binding.ng-scope')
+       
+        this.clientFirstResult = page.locator ('[class="ng-binding ng-scope"]')
         this.reportsLink = page.locator ('text=REPORTS')
         this.cashManagementLink = page.locator ('text=CASH MANAGEMENT')
+    }
+
+    async selectClientName(name) {
+        await this.clientNameInput.waitFor()
+        await this.clientNameInput.type(name)
+        await this.clientFirstResult.click({force: true})
     }
 }

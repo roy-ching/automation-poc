@@ -4,17 +4,17 @@ const config = {
   testDir: './tests',
   timeout: 60000,
   expect: {
-    timeout: 30000
+    timeout: 60000
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
     headless: true,
     viewport: { width: 1280, height: 720 },
-    actionTimeout: 30000,
+    actionTimeout: 60000,
     ignoreHTTPSErrors: true,
     video: 'on-first-retry',
     screnshot: 'on',

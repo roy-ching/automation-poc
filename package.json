@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "regression:qa-chrome": "env=qa && is-ci && env=ci; cross-env test_env=$env npx playwright test --config=playwright.config.js --project=chromium",
+    "regression:qa-chrome-gh": "env=qa && is-ci && env=ci; cross-env test_env=$env npx playwright test --config=playwright.config.js --project=chromium",
+    "regression:qa-chrome": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=chromium",
     "regression:qa-firefox": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=firefox",
     "regression:qa-safari": "cross-env test_env=qa npx playwright test --config=playwright.config.js --project=webkit",
     "regression:uat-chrome": "cross-env test_env=uat npx playwright test --config=playwright.config.js --project=chromium",

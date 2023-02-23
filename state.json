@@ -1,0 +1,35 @@
+{
+  "cookies": [
+    {
+      "name": "visid_incap_1861870",
+      "value": "0y5aLmaRQna/l1lmChPcKKuc92MAAAAAQUIPAAAAAADBR/vjA/Isxf7IfURkMbhU",
+      "domain": ".vancopayments.com",
+      "path": "/",
+      "expires": 1708671323.037246,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "incap_ses_1599_1861870",
+      "value": "yCXKOn3/kn35VyzeC8owFquc92MAAAAAdUvpxv04EJ9HyTvfp1fm9Q==",
+      "domain": ".vancopayments.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "lbl",
+      "value": "vanco",
+      "domain": "pmx-qa.vancopayments.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": []
+}
