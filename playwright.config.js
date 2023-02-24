@@ -1,4 +1,4 @@
-const { devices } = require('@playwright/test');
+import { devices } from '@playwright/test';
 
 const config = {
   testDir: './tests',
@@ -6,9 +6,9 @@ const config = {
   expect: {
     timeout: 60000
   },
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
@@ -21,7 +21,11 @@ const config = {
     trace: 'retain-on-failure',
     baseURL: process.env.BASE_URL || 'https://pmx-qa.vancopayments.com/',
   },
-  globalSetup:"tests/utils/globalSetup.js",
+  globalSetup: require.resolve('./global-setup'),
+  use: {
+    baseURL: process.env.BASE_URL || 'https://pmx-qa.vancopayments.com/',
+    storageState: 'state.json',
+  },
 
   projects: [
     {
@@ -40,4 +44,4 @@ const config = {
 
 };
 
-module.exports = config;
+export default config;

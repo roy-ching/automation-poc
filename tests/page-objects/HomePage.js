@@ -25,17 +25,18 @@ export class HomePage {
         this.transactionsList = page.locator('[data-ng-repeat="x in gridData"]')
         this.assignButtons = page.locator('button:has-text("Assign")')
         this.statusFilterSelect = page.locator('table > tbody > tr > td:nth-child(3) > select')
-        this.rowsList = page.locator ('#gridrecord')
+        this.rowsList = page.locator('#gridrecord')
     }
 
-    async selectStatusFilter(status){
+    async selectStatusFilter(status) {
         await this.page.waitForTimeout(2000)
         const statusSelect = await this.statusFilterSelect
-        if (await status == 'pending'){
+
+        if (await status == 'pending') {
             await statusSelect.selectOption('string:PENDING')
         }
 
-        if (status == 'assigned'){
+        if (status == 'assigned') {
             await statusSelect.selectOption('string:ASSIGNED')
         }
     }
@@ -58,12 +59,11 @@ export class HomePage {
         await this.transactionsList.nth(0).locator('button.floatRight.btnClean.txtWhite.btnGridCloseLoc').click()
     }
 
-    async copyAccount(){
-        await this.assignPayment.copyButton.click({force: true})
+    async copyAccount() {
+        await this.assignPayment.copyButton.click({ force: true })
     }
 
-    async getTotalRows(){
-        await this.page.waitForTimeout(1000)
+    async getTotalRows() {
         return await this.rowsList.count()
     }
 }

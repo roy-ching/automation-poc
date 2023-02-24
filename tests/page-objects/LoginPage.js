@@ -1,5 +1,4 @@
 import { expect } from "@playwright/test"
-import ENV from '../utils/env'
 
 export class LoginPage {
 
@@ -11,21 +10,21 @@ export class LoginPage {
     }
 
     async goTo() {
-        await this.page.goto(ENV.BASE_URL)
+        await this.page.goto(process.env.BASE_URL)
     }
 
     async validLogin() {
-        await this.userIdField.type(ENV.USERNAME)
-        await this.passwordField.type(ENV.PASSWORD)
-        await this.logindButton.click({force: true})
+        await this.userIdField.type(process.env.USERNAME)
+        await this.passwordField.type(process.env.PASSWORD)
+        await this.logindButton.click({ force: true })
         await this.page.waitForURL('**/vanco/home');
     }
 
     async invalidLogin() {
         await this.userIdField.type('invalid')
         await this.passwordField.type('invalid')
-        await this.logindButton.click({force: true})
-        
+        await this.logindButton.click({ force: true })
+
     }
 
     async validatePopupMessage(message) {
