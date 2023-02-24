@@ -11,12 +11,12 @@ export class LoginPage {
     }
 
     async goTo() {
-        await this.page.goto(ENV.BASE_URL)
+        await this.page.goto('https://pmx-qa.vancopayments.com/#/vanco/signin')
     }
 
     async validLogin() {
-        await this.userIdField.type(ENV.USERNAME)
-        await this.passwordField.type(ENV.PASSWORD)
+        await this.userIdField.type('QAAutomation')
+        await this.passwordField.type('1234test')
         await this.logindButton.click({force: true})
         await this.page.waitForURL('**/vanco/home');
     }

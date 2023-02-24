@@ -1,31 +1,22 @@
 import { test, expect } from '@playwright/test'
-import { LoginPage } from './page-objects/LoginPage'
 import { WelcomePage } from './page-objects/WelcomePage'
 import { HomePage } from './page-objects/HomePage'
 
-let loginPage
 let welcomePage
 let homePage
 
 test.describe('Assign and Reject  Payments- T5373277', () => {
 
     //Before Hook
-    test.beforeAll(async ({ browser }) => {
-        const context = await browser.newContext()
-        const page = await context.newPage()
-        
-        loginPage = new LoginPage(page)
-        welcomePage = new WelcomePage(page)
-        homePage = new HomePage(page)
+    test.beforeEach(async ({ page }) => {
+        await page.goto('/');
 
-        await loginPage.goTo()
-        await loginPage.validLogin()
-        await expect(page).toHaveTitle('Payment Exchange')
+        homePage = new HomePage(page)
+        welcomePage = new WelcomePage(page)
         await welcomePage.header.selectClientName('Demo-Client555')
         expect(await welcomePage.header.clientName.textContent()).toContain('Demo-Client555')
         await page.waitForLoadState('networkidle')
         await homePage.pendingTransactionsLink.waitFor()
-        await context.storageState({path: 'state.json'})
     })
 
     test ('Validate transaction columns', async ({ page }) => {

@@ -8,11 +8,11 @@ const config = {
   },
   fullyParallel: false,
   forbidOnly: !!process.env.CI,
-  retries: process.env.CI ? 2 : 1,
+  retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-    headless: true,
+    headless: false,
     viewport: { width: 1280, height: 720 },
     actionTimeout: 60000,
     ignoreHTTPSErrors: true,
@@ -21,7 +21,11 @@ const config = {
     trace: 'retain-on-failure',
     baseURL: process.env.BASE_URL || 'https://pmx-qa.vancopayments.com/',
   },
-  globalSetup:"tests/utils/globalSetup.js",
+  globalSetup: require.resolve('./global-setup'),
+  use: {
+    baseURL: process.env.BASE_URL || 'https://pmx-qa.vancopayments.com/',
+    storageState: 'state.json',
+  },
 
   projects: [
     {
