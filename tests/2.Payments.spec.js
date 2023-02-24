@@ -7,16 +7,17 @@ let homePage
 
 test.describe('Assign and Reject  Payments- T5373277', () => {
 
+    const client = 'Demo-Client555'
+    
     //Before Hook
     test.beforeEach(async ({ page }) => {
         await page.goto('/');
 
         homePage = new HomePage(page)
         welcomePage = new WelcomePage(page)
-        await welcomePage.header.selectClientName('Demo-Client555')
-        expect(await welcomePage.header.clientName.textContent()).toContain('Demo-Client555')
+        await welcomePage.header.selectClientName(client)
+        expect(await welcomePage.header.clientName.textContent()).toContain(client)
         await page.waitForLoadState('networkidle')
-        await homePage.pendingTransactionsLink.waitFor()
     })
 
     test ('Validate transaction columns', async ({ page }) => {

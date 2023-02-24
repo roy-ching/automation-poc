@@ -12,7 +12,7 @@ test.describe('PMX Login - T5373276', () => {
     })
 
     test('Validate Login Icon is displayed', async ({  }) => {
-        await expect(welcomePage.header.logoImage).toBeVisible({timeout: 90000})
+        await expect(welcomePage.header.logoImage).toBeVisible()
     })
 
     test('Validate Top Right Menu is displayed', async ({ page }) => {
