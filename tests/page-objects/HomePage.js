@@ -1,16 +1,19 @@
 import { Header } from "./component/Header"
 import { AssignPayment } from "./component/AssignPayment"
 import { expect } from '@playwright/test'
+import { RejectPayment } from "./component/RejectPayment"
 
 export class HomePage {
 
     header = Header
     assignPayment = AssignPayment
+    rejectPayment = RejectPayment
 
     constructor(page) {
         this.page = page
         this.header = new Header(page)
         this.assignPayment = new AssignPayment(page)
+        this.rejectPayment = new RejectPayment(page)
         this.pendingTransactionsLink = page.locator('a.btnClean.btnMetrics.selected-view')
         this.postedTransactionsLink = page.locator('a.btnClean.btnMetrics.selected-view')
         this.transactionsList = page.locator('[data-ng-repeat="x in gridData"]')
@@ -26,6 +29,7 @@ export class HomePage {
         this.assignButtons = page.locator('button:has-text("Assign")')
         this.statusFilterSelect = page.locator('table > tbody > tr > td:nth-child(3) > select')
         this.rowsList = page.locator('#gridrecord')
+        this.closePayment = page.locator('(//button[@class="floatRight btnClean txtWhite btnGridCloseLoc"])[1]')
     }
 
     async selectStatusFilter(status) {
@@ -39,28 +43,72 @@ export class HomePage {
         if (status == 'assigned') {
             await statusSelect.selectOption('string:ASSIGNED')
         }
+
+        if (status == 'rejected') {
+            await statusSelect.selectOption('string:REJECTED')
+        }
     }
 
-    async assignFirstTransaction() {
+    async assignEditFirstTransaction(action) {
         await this.page.waitForTimeout(2000)
         const count = await this.transactionsList.count()
         if (count > 0) {
-            await this.transactionsList.nth(0).locator('button:has-text("Assign")').click()
+            if (action == 'Assign')
+                await this.transactionsList.nth(0).locator('button:has-text("Assign")').click()
+            else if (action == 'Update')
+                await this.transactionsList.nth(0).locator('button:has-text("Update")').click()
+            else if (action == 'Reject')
+                await this.transactionsList.nth(0).locator('button:has-text("Reject")').click()
         }
         else {
             console.log('No Pending transactions')
         }
+    }
+
+    async assignFirstTransaction() {
+        await this.assignEditFirstTransaction('Assign')
         await this.copyAccount()
         const assignedValue = await this.assignPayment.assignedAccount.textContent()
         const receivedValue = await this.assignPayment.receivedAccount.textContent()
         expect(assignedValue).toEqual(receivedValue)
-        await this.assignPayment.group.selectOption("number:4736")
+        await this.assignPayment.group.selectOption({ index: 0 })
         await this.assignPayment.assignButton.click()
         await this.transactionsList.nth(0).locator('button.floatRight.btnClean.txtWhite.btnGridCloseLoc').click()
     }
 
+    async updateFirstTransaction() {
+        await this.assignEditFirstTransaction('Update')
+        await this.copyAccount()
+        await this.assignPayment.group.hover()
+        await this.assignPayment.group.selectOption({ index: 1 })
+        await this.assignPayment.alwaysAssignedAccountCb.selectOption({ index: 1 })
+        await this.page.click('button:has-text("Assign")')
+    }
+
+    async rejectFirstPendingTransaction(){
+        await this.assignEditFirstTransaction('Reject')
+        await this.rejectPayment.reason.hover()
+        await this.rejectPayment.reason.selectOption({ index: 1 })
+        await this.rejectPayment.alwaysReject.selectOption({ label: 'No' })
+        await this.page.click('button:has-text("Submit")')
+    }
+
+    async verifyChanges() {
+        this.assignEditFirstTransaction('Update')
+        await this.assignPayment.group.hover()
+    }
+
+    async updatePaymentWithoutGroup() {
+        this.assignEditFirstTransaction('Update')
+        await this.assignPayment.group.hover()
+        await this.assignPayment.group.selectOption({ label: 'Select a group' })
+        await this.page.click('button:has-text("Assign")')
+    }
+
     async copyAccount() {
-        await this.assignPayment.copyButton.click({ force: true })
+        await this.assignPayment.copyButton.waitFor()
+        await this.assignPayment.copyButton.focus()
+        await this.assignPayment.copyButton.click()
     }
 
     async getTotalRows() {
