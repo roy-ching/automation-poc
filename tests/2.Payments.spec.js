@@ -5,7 +5,7 @@ import { HomePage } from './page-objects/HomePage'
 let welcomePage
 let homePage
 
-test.describe.only('Assign and Reject  Payments- T5373277', () => {
+test.describe('Assign and Reject  Payments- T5373277', () => {
 
     const client = 'Demo-Client555'
     
